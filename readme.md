@@ -1,0 +1,117 @@
+Here’s the README.md in English for your **termai-cdn** project:
+
+```markdown
+# Termai CDN
+
+Termai CDN is a simple CDN (Content Delivery Network) service for uploading and serving various types of files (images, PDFs, audio). This project is built using **Express.js** and **Multer** for handling file uploads and storing them on the server.
+
+## Creator
+- **Azfir** (GitHub: [Rifza123](https://github.com/Rifza123))
+
+## Features
+- Allows uploading of files with various types: JPEG, PNG, PDF, MP3, WAV, MPEG.
+- Provides CDN URL for accessing uploaded files.
+- Limits file size to 10MB.
+- Security system that filters files based on type and size.
+
+## Technologies
+- **Node.js**: To run the server.
+- **Express.js**: For handling HTTP requests.
+- **Multer**: For handling file uploads.
+- **FS (File System)**: For handling file storage.
+
+## Installation
+
+1. Clone this repository to your local machine:
+   ```bash
+   git clone https://github.com/Rifza123/termai-cdn.git
+   ```
+
+2. Navigate to the project folder:
+   ```bash
+   cd termai-cdn
+   ```
+
+3. Install the required dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Start the server:
+   ```bash
+   npm start
+   ```
+
+The server will run on port 3000 by default. You can access the API at `http://localhost:3000`.
+
+## API Endpoint
+
+### `POST /api/upload`
+
+To upload a file, send a POST request to the `/api/upload` endpoint with a `form-data` request. Make sure the file does not exceed the 10MB size limit and has a supported type.
+
+#### Example Usage:
+
+```javascript
+const formData = new FormData();
+formData.append("file", fileInput.files[0]); // Using input type="file"
+
+fetch("http://localhost:3000/api/upload", {
+  method: "POST",
+  body: formData
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+#### Response
+
+If successful, you will receive a JSON response like this:
+
+```json
+{
+  "status": true,
+  "path": "https://yourdomain.com/storage/unique-file-id.jpg"
+}
+```
+
+If there is an error, you will get an error message like this:
+
+```json
+{
+  "error": "No file uploaded"
+}
+```
+
+## File Handling
+
+- All uploaded files will be stored in the `storage/` folder.
+- Each uploaded file will be given a unique name based on a randomly generated ID.
+
+## Limitations
+
+- The maximum file size is 10MB.
+- Supported file types are:
+  - Images: `image/jpeg`, `image/png`
+  - PDF: `application/pdf`
+  - Audio: `audio/mp3`, `audio/wav`, `audio/mpeg`
+
+## Contributing
+
+If you'd like to contribute to this project, please fork this repository, create a new branch, and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see [LICENSE](LICENSE) for more details.
+```
+
+This version of the README includes:
+
+- **Project Overview**: An explanation of what Termai CDN does.
+- **Setup and Installation**: Clear instructions on how to set up and run the project.
+- **API Documentation**: Information on how to interact with the file upload API.
+- **File Limitations**: Details on file size and type restrictions.
+- **Contributing**: Instructions for those who wish to contribute.
+  
+Feel free to modify it as needed!
