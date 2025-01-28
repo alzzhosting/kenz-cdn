@@ -1,13 +1,10 @@
 Here’s the README.md in English for your **termai-cdn** project:
 
-```markdown
 # Termai CDN
 
 Termai CDN is a simple CDN (Content Delivery Network) service for uploading and serving various types of files (images, PDFs, audio). This project is built using **Express.js** and **Multer** for handling file uploads and storing them on the server.
 ## Creator
 - **Azfir** (GitHub: [Rifza123](https://github.com/Rifza123))
-
----
 
 ## Features
 - Allows uploading of files with various types: JPEG, PNG, PDF, MP3, WAV, MPEG.
@@ -15,15 +12,11 @@ Termai CDN is a simple CDN (Content Delivery Network) service for uploading and 
 - Limits file size to 10MB.
 - Security system that filters files based on type and size.
 
----
-
 ## Technologies
 - **Node.js**: To run the server.
 - **Express.js**: For handling HTTP requests.
 - **Multer**: For handling file uploads.
 - **FS (File System)**: For handling file storage.
-
----
 
 ## Installation
 
