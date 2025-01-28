@@ -6,7 +6,7 @@ const fs = require('fs').promises
 const app = express()
 const PORT = 3000
 
-const apikey = "AIzaBj7z2z3xBjsk"
+const apikey = "default"
 const domain = "https://cdn.xtermai.xyz"
 
 function generateRandomId(length = 5) {
