@@ -5,6 +5,8 @@ const fs = require('fs').promises
 
 const app = express()
 const PORT = 3000
+
+const apikey = "AIzaBj7z2z3xBjsk"
 const domain = "https://cdn.xtermai.xyz"
 
 function generateRandomId(length = 5) {
@@ -16,7 +18,7 @@ function generateRandomId(length = 5) {
   return result;
 }
 
-app.use('/storage', express.static(path.join(__dirname, 'storage')))
+app.use('/', express.static(path.join(__dirname, 'storage')))
 
 const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
@@ -55,6 +57,8 @@ const upload = multer({
 
 app.post('/api/upload', upload.single('file'), async (req, res) => {
   try {
+    if (!req.query.key) return res.status(403).end()
+    if (req.query.key !== apikey) return res.status(403).end()
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' })
     }
@@ -71,7 +75,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
 
     res.json({
       status: true,
-      path: `${domain}/storage/${req.file.filename}`,
+      path: `${domain}/${req.file.filename}`,
     })
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -88,6 +92,10 @@ app.use((err, req, res, next) => {
   }
   res.status(500).json({ error: 'Something went wrong' })
 })
+
+app.use((req, res, next) => {
+  res.status(404).end()
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}`)

@@ -54,13 +54,13 @@ To upload a file, send a POST request to the `/api/upload` endpoint with a `form
 const axios = require("axios")
 const fs = require("fs")
 const Form = require("form-data")
-
+const key = "default"
 const uploadFile = async (file) => {
   const formData = new Form();
   formData.append('file', file, { filename: 'anu.jpg' });
 
   try {
-    const response = await axios.post('https://cdn.xtermai.xyz/api/upload', formData, {
+    const response = await axios.post('https://cdn.xtermai.xyz/api/upload?key='+key, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
