@@ -53,16 +53,28 @@ To upload a file, send a POST request to the `/api/upload` endpoint with a `form
 #### Example Usage:
 
 ```javascript
-const formData = new FormData();
-formData.append("file", fileInput.files[0]); // Using input type="file"
+const axios = require("axios")
+const fs = require("fs")
+const Form = require("form-data")
 
-fetch("http://localhost:3000/api/upload", {
-  method: "POST",
-  body: formData
-})
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Error:', error));
+const uploadFile = async (file) => {
+  const formData = new Form();
+  formData.append('file', file, { filename: 'anu.jpg' });
+
+  try {
+    const response = await axios.post('https://cdn.xtermai.xyz/api/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log('File uploaded successfully', response.data);
+  } catch (error) {
+    console.error('Error uploading file', error.response?.data || error.message);
+  }
+};
+
+uploadFile(fs.readFileSync("img.jpg"))
 ```
 
 #### Response
@@ -96,22 +108,3 @@ If there is an error, you will get an error message like this:
   - Images: `image/jpeg`, `image/png`
   - PDF: `application/pdf`
   - Audio: `audio/mp3`, `audio/wav`, `audio/mpeg`
-
-## Contributing
-
-If you'd like to contribute to this project, please fork this repository, create a new branch, and submit a pull request.
-
-## License
-
-This project is licensed under the MIT License - see [LICENSE](LICENSE) for more details.
-```
-
-This version of the README includes:
-
-- **Project Overview**: An explanation of what Termai CDN does.
-- **Setup and Installation**: Clear instructions on how to set up and run the project.
-- **API Documentation**: Information on how to interact with the file upload API.
-- **File Limitations**: Details on file size and type restrictions.
-- **Contributing**: Instructions for those who wish to contribute.
-  
-Feel free to modify it as needed!
