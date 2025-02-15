@@ -7,7 +7,7 @@ const app = express()
 const PORT = 3000
 
 const apikey = "default"
-const domain = "https://cdn.xtermai.xyz"
+const domain = "https://kenzprivat.biz.id"
 
 function generateRandomId(length = 5) {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
